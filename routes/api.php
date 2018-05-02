@@ -13,12 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 Route::group(['prefix'  => 'beers'], function() {
     Route::get('/random','BeerAPIController@randomBeers');
 });
-Route::group(['prefix'  => 'beers'], function() {
-    Route::get('/random','BreweryAPIController@getBreweryBeers');
+Route::group(['prefix'  => 'brewery'], function() {
+    Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers');
 });
