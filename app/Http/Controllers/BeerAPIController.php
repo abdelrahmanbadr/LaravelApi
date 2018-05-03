@@ -23,12 +23,19 @@ class BeerAPIController extends Controller
      * Api need to take request body because we using non-Premium account
      * @return Json 
      */
-    public function randomBeers()
+    public function randomBeer()
     {
         $result = $this->breweryDb->sendRequest('beers', 'GET',[
              'ibu'=> rand(10,100),
+             'hasLabels'=> "Y",
+             "randomCount"=>1,
+             "order"=>"random",
         ]);
         $response = json_decode((string) $result->getBody());
+        //if there is no describtion load another beer
+        if(empty($response->data[0]->description)){
+            return $this->randomBeer();
+        }
         return response()->json($response->data);
     }
     /**
