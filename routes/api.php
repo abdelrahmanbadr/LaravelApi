@@ -17,7 +17,8 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 Route::group(['prefix'  => 'beers'], function() {
-    Route::get('/random','BeerAPIController@randomBeer');
+    Route::get('/random','BeerAPIController@getRandomBeer');
+    // Route::get('/random','BeerAPIController@randomBeer');
 });
 Route::group(['prefix'  => 'brewery'], function() {
     Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers');

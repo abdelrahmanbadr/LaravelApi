@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App;
+use App\Jobs\RandomBeerJob;
+use App,Cache;
 class BeerAPIController extends Controller
 {
     /**
@@ -20,7 +21,8 @@ class BeerAPIController extends Controller
 
      /**
      * return random beers 
-     * Api need to take request body because we using non-Premium account
+     * Api need to take [ name, abv, ibu, srmId, availabilityId, styleId] 
+     * because we using non-Premium account
      * @return Json 
      */
     public function randomBeer()
@@ -36,7 +38,28 @@ class BeerAPIController extends Controller
         if(empty($response->data[0]->description)){
             return $this->randomBeer();
         }
-        return response()->json($response->data);
+        return response()->json($response->data[0]);
+    }
+    /**
+     * function to cache random beer  
+     */
+    public function cacheRandomBeer()
+    {
+        Cache::forever('randomBeer',$this->randomBeer());
+    }
+    /**
+     * function to cache random beer  
+     */
+    public function getRandomBeer()
+    {
+
+        if(Cache::Has('randomBeer')){
+            $randomBeer = Cache::get('randomBeer');
+        }else{
+            $randomBeer = $this->randomBeer();
+        }
+        $this->dispatch(new RandomBeerJob());
+        return $randomBeer;
     }
     /**
      * return breweries of specific beer 
