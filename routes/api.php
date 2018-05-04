@@ -23,3 +23,6 @@ Route::group(['prefix'  => 'beers'], function() {
 Route::group(['prefix'  => 'brewery'], function() {
     Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers');
 });
+Route::group(['prefix'  => 'search'], function() {
+    Route::get('/{q}/{type}','SearchApiController@search');
+});
