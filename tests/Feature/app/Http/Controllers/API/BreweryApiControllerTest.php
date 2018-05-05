@@ -20,4 +20,16 @@ class BreweryApiControllerTest extends TestCase
         ->assertStatus(200);
         
     }
+   /**
+     * test getBeerBrewery
+     *
+     * @return void
+     */
+    public function test_get_breweries_beers_methods_with_wrong_id()
+    {
+        $this
+        ->get(route('api.breweries.beers',['ids'=>'UbQHhM,5UddsE,wrongId']))
+        ->assertStatus(500);
+        
+    }
 }
