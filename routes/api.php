@@ -16,13 +16,15 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-Route::group(['prefix'  => 'beers'], function() {
-    Route::get('/random','BeerAPIController@getRandomBeer');
-    // Route::get('/random','BeerAPIController@randomBeer');
-});
-Route::group(['prefix'  => 'brewery'], function() {
-    Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers');
-});
-Route::group(['prefix'  => 'search'], function() {
-    Route::get('/{q}/{type}','SearchApiController@search');
+Route::group(['namespace'  => 'API'], function() {
+    Route::group(['prefix'  => 'beers'], function() {
+        Route::get('/random','BeerAPIController@getRandomBeer')->name('api.beers.random');
+        // Route::get('/random','BeerAPIController@randomBeer');
+    });
+    Route::group(['prefix'  => 'brewery'], function() {
+        Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers')->name('api.brewery.beers');
+    });
+    Route::group(['prefix'  => 'brewerydbSearch'], function() {
+        Route::get('/{q}/{type}','SearchApiController@search')->name('api.brewerydb.search');
+    });
 });
