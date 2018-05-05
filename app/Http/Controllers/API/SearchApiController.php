@@ -26,11 +26,11 @@ class SearchApiController extends Controller
     {
         // dd($searchQuery);
         if(!in_array($searchType,$this->validSearchTypes)){
-            return response()->json(["error"=>"Search Type Is Not Valid"],$this->unprocessableStatusCode);
+            return response()->json(["Search Type Is Not Valid"],$this->unprocessableStatusCode);
         }
         
         if($this->isValidateSearchQuery($searchQuery) == false ){
-            return response()->json(["error"=>"Search Query Is Not Valid"],$this->unprocessableStatusCode);
+            return response()->json(["Search Query Is Not Valid"],$this->unprocessableStatusCode);
         }
         
         $result = $this->breweryDb->sendRequest('/search', 'GET',[
@@ -41,7 +41,7 @@ class SearchApiController extends Controller
         if(!empty($response->data))
             return response()->json($response->data);
         else
-            return response()->json(["error"=>"No Beers Exists"]);
+            return response()->json(["empty"=>"No Beers Exists"]);
     }
 
     /**

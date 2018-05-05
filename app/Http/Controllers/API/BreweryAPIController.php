@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Facades\App\Http\Controllers\BeerAPIController as Beer;
 use App;
 class BreweryAPIController extends Controller
 {
@@ -23,12 +22,17 @@ class BreweryAPIController extends Controller
      * take parameter beer Id 
      * @return Json 
      */
-    public function getBreweryBeers($beerId) //DX8ad2
+    public function getBreweriesBeers($ids) //DX8ad2
     {
-        // need to be refactored and merge all breweries beers not first one only
-        $brewery = Beer::getBeerBrewery($beerId);
-        $result = $this->breweryDb->sendRequest('/brewery/'.$brewery[0]->id.'/beers', 'GET');
-        $response = json_decode((string) $result->getBody());
-        return response()->json($response->data);
+        $ids = explode(',',$ids); 
+        $data = [];
+        foreach($ids as $id){
+            $result = $this->breweryDb->sendRequest('/brewery/'.$id.'/beers', 'GET');
+            $response = json_decode((string) $result->getBody());
+            if(!empty($response->data))
+                $data=array_merge($data,$response->data);
+
+        }
+        return response()->json($data);
     }
 }

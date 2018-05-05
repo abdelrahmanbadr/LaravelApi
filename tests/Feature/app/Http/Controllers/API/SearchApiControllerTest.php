@@ -19,9 +19,7 @@ class SearchApiControllerTest extends TestCase
         $type = "beer";
         $this
         ->get(route('api.brewerydb.search',['q'=>$serachQuery,'type'=>$type]))
-        ->assertJson([
-            'error' => "Search Query Is Not Valid",
-        ]);
+        ->assertJson( ["Search Query Is Not Valid"]);
     }
     /**
      * test Search Type
@@ -35,9 +33,9 @@ class SearchApiControllerTest extends TestCase
         $this
         ->get(route('api.brewerydb.search',['q'=>$serachQuery,'type'=>$type]))
         ->assertStatus(422)
-        ->assertJson([
-            'error' => "Search Type Is Not Valid",
-        ]);
+        ->assertJson(
+            ["Search Type Is Not Valid"]
+        );
     }
     /**
      * test Search function status
@@ -52,7 +50,7 @@ class SearchApiControllerTest extends TestCase
         ->get(route('api.brewerydb.search',['q'=>$serachQuery,'type'=>$type]))
         ->assertStatus(200)
         ->assertJson([
-            'error' => "No Beers Exists",
+            'empty' => "No Beers Exists",
         ]);
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use Facades\App\Http\Controllers\BeerAPIController as Beer;
+use Facades\App\Http\Controllers\API\BeerAPIController as Beer;
 use Cache;
 
 class RandomBeerJob implements ShouldQueue

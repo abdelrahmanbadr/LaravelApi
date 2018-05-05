@@ -22,7 +22,7 @@ Route::group(['namespace'  => 'API'], function() {
         // Route::get('/random','BeerAPIController@randomBeer');
     });
     Route::group(['prefix'  => 'brewery'], function() {
-        Route::get('/beers/{beerId}','BreweryAPIController@getBreweryBeers')->name('api.brewery.beers');
+        Route::get('/{ids}/beers','BreweryAPIController@getBreweriesBeers')->name('api.breweries.beers');
     });
     Route::group(['prefix'  => 'brewerydbSearch'], function() {
         Route::get('/{q}/{type}','SearchApiController@search')->name('api.brewerydb.search');
