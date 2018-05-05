@@ -22,7 +22,7 @@ class BreweryAPIController extends Controller
      * take parameter beer Id 
      * @return Json 
      */
-    public function getBreweriesBeers($ids) //DX8ad2
+    public function getBreweriesBeers($ids)
     {
         $ids = explode(',',$ids); 
         $data = [];

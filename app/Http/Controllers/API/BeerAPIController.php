@@ -69,7 +69,6 @@ class BeerAPIController extends Controller
      */
     public function getBeerBrewery($beerId)
     {
-        // tomwG8 0SKDjZ 8PgW0r   
         $result = $this->breweryDb->sendRequest('/beer/'.$beerId.'/breweries', 'GET');
         $response = json_decode((string) $result->getBody());
         return $response->data;
