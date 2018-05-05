@@ -8,6 +8,6 @@ php artisan serve
 * To run queue operation you should run php artisan queue:work
 
 ### Unit Test:
-*To run unittest you should run vendor/bin/phpunit
+* To run unittest you should run vendor/bin/phpunit
 
 
