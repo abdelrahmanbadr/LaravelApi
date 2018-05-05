@@ -30,6 +30,7 @@ class BeerAPIController extends Controller
         $result = $this->breweryDb->sendRequest('beers', 'GET',[
              'ibu'=> rand(10,100),
              'hasLabels'=> "Y",
+             'withBreweries'=> "Y",
              "randomCount"=>1,
              "order"=>"random",
         ]);

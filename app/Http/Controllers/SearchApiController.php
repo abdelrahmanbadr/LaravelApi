@@ -17,18 +17,28 @@ class SearchApiController extends Controller
         $this->breweryDb = App::make('brewerydb');
     }
      /**
-     * return beers by the brewery associated with that beer
      * take parameters search query and search type
      * @return Json 
      */
-    public function search($searchQuery,$type) 
+    public function search($searchQuery,$searchType) 
     {
+        if($this->isValidateSearchQuery == false ){
+            return response()->json(["error"=>"Search Query Is Not Valid"]);
+        }
 
         $result = $this->breweryDb->sendRequest('/search', 'GET',[
-            'searchQuery'=>$q,
-            'type'=>$type,
+            'q'=>$searchQuery,
+            'type'=>$searchType,
        ]);
         $response = json_decode((string) $result->getBody());
-        return response()->json($response->data);
+        if(!empty($response->data))
+            return response()->json($response->data);
+        else
+            return response()->json(["error"=>"No Beers Exists"]);
+    }
+
+    public function isValidateSearchQuery($searchQuery) 
+    {
+        return !preg_match('/[^A-Za-z0-9\\- ]/', $searchQuery);  
     }
 }

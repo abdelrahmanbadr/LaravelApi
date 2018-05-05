@@ -14,4 +14,5 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/test','BreweryAPIController@getBreweryBeers');
+// Route::get('/test','BreweryAPIController@getBreweryBeers');
+Route::get('/test','SearchApiController@validateSearchQuery');
